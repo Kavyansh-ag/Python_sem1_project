@@ -2,9 +2,9 @@ import board
 
 b = board.Board().grid
 
-EMPTY = 'e' #Means cell is empty
-WHITE = 'w' #Means cell is filled with white
-BLACK = 'b' #Means cell is filled with black 
+# EMPTY = 0 --> Means cell is empty
+# WHITE = 2 --> Means cell is filled with white
+# BLACK = 1 --> Means cell is filled with black
 
 
 DIRECTIONS = [
@@ -23,15 +23,16 @@ def is_on_board(r, c):
         return True
     return False
 
-def check_direc(b, r, c, player,vector): #board --> state of board
+# It reeturns the coins to be flipped in a particular direction.  
+def check_direc(b, r, c, player,vector): #b --> state of board
                                               #r, c -->  co-ord of proposed new move
                                               #player --> current player
-                                              #(dr, dc) --> DIRECn vector
+                                              #(dr, dc) --> direction vector
     pieces_to_flip = []
     curr_r = r + vector[0]
     curr_c = c + vector[1]
     while (is_on_board(curr_r, curr_c)):
-        if b[curr_r][curr_c] == 'e':
+        if b[curr_r][curr_c] == 0:
             return []
         elif b[curr_r][curr_c] == player:
             return pieces_to_flip
@@ -39,16 +40,14 @@ def check_direc(b, r, c, player,vector): #board --> state of board
             pieces_to_flip.append(list(curr_r, curr_c))
             curr_r+=vector[0]
             curr_c+=vector[1]
-        return pieces_to_flip
+        # return pieces_to_flip
 
 def count(b):
-    count_w=0
-    count_b=0
     for i in b:
         for j in i:
-            if j==W:
+            if j == 2:
                 count_w+=1
-            elif j==B:
+            elif j == 1:
                 count_b+=1
     return [count_w,count_b]
 
@@ -57,11 +56,11 @@ def legal_move(b,vector,r,c,player):
     curr_r= r + vector[0]
     curr_c= c + vector[1]
     while(is_on_board(curr_r,curr_c) is True):
-        if b[curr_r][curr_c]== 0
+        if b[curr_r][curr_c]== 0:
             return False
-        elif b[curr_r][curr_c]==player
+        elif b[curr_r][curr_c]==player:
             return True
-        elif b[curr_r][curr_c]!=player and b[curr_r][curr_c]!= 0
+        elif b[curr_r][curr_c]!=player and b[curr_r][curr_c]!= 0:
             curr_r+=vector[0]
             curr_c+=vector[1]
             continue
@@ -77,10 +76,36 @@ def new_state(b,r,c,player):
             
     return b
 
+def has_legal_moves(b,player):
+    for r in range(8):
+        for c in range(8):
+            if b[r][c] == 0:
+                for vector in DIRECTIONS:
+                    if legal_move(b,vector,r,c,player) is True:
+                        return True
+    return False
+
+def make_move(b,r,c,player):
+    b[r][c] = player
+    for vector in DIRECTIONS:
+        if legal_move(b,vector,r,c,player) is True:
+            pieces_to_flip = check_direc(b,r,c,player,vector)
+            for pos in pieces_to_flip:
+                b[pos[0]][pos[1]] = player
+
+def switch_player(player):
+    if player == 1: return 2
+    else: return 1
 
 
+def get_next_player(b, current_player):
+    opponent = switch_player(current_player) #find opponent
 
+    if has_legal_moves(b, opponent):#opponent gets to play only if they have legal moves
+        return opponent
 
+    elif has_legal_moves(b, current_player):
+        return current_player
 
-
-        
+    return b
+    
