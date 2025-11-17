@@ -62,3 +62,6 @@ class myGUI:
         control= self.control
         control.handle_move(row, col)
         # print("Clicked at:", row, col)
+
+    def load_game(self,control):
+        control.load()
