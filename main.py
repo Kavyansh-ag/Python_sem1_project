@@ -1,6 +1,14 @@
 import board
-import game_logic
+import game_logic as logic
 import file_manager   
-import GUI
+from GUI import myGUI
 
-ui=GUI.myGUI()
+# class Game:
+#     def __init__(self):
+#         self.board = board.Board()
+#         self.gui =myGUI(self)
+
+#     def handle_move(self, row, col):
+#         print("Controller got:", row, col)
+
+myGUI_instance = myGUI()

@@ -25,8 +25,6 @@ class myGUI:
 
         self.btn_save = tk.Button(self.root, text="Save")
 
-        self.canvas.bind("<Button-1>", self.click)
-
         self.root.mainloop()
     ###################################################################################
 
@@ -50,7 +48,7 @@ class myGUI:
         widget2.destroy()
         widget3.config(text="Black:2                      White:2")
         widget4.place(x=472, y=960)
-
+        self.canvas.bind("<Button-1>", self.click)
         self.draw_grid(896, 896)
         self.play(3, 3, "white", 2, 2)
         self.play(3, 4, "black", 2, 2)
@@ -61,7 +59,3 @@ class myGUI:
         row = event.y // 112
         col = event.x // 112
         return row, col
-
-
-myGUI()
-
