@@ -3,7 +3,8 @@ import tkinter as tk
 class myGUI:
 
     ###################################################################################
-    def __init__(self):
+    def __init__(self,control):
+        self.control=control
         self.root = tk.Tk()
         self.root.configure(bg="black")
         self.root.title("Othello Board")
@@ -13,7 +14,7 @@ class myGUI:
                                 bg="darkgreen", highlightthickness=3)
         self.canvas.pack(anchor="center")
 
-        self.btn_start = tk.Button(self.root, text="Start",command=lambda: self.start(self.btn_start, self.btn_load, self.status, self.btn_save))
+        self.btn_start = tk.Button(self.root, text="Start",command=lambda: self.start(self.btn_start, self.btn_load, self.status, self.btn_save,control))
         self.canvas.create_window(448, 400, window=self.btn_start)
 
         self.btn_load = tk.Button(self.root, text="Load")
@@ -43,12 +44,12 @@ class myGUI:
         self.canvas.create_oval(x1, y1, x2, y2, fill=color)
         self.status.config(text=f"Black:{blackscore}                      White:{whitescore}")
 
-    def start(self, widget1, widget2, widget3, widget4):
+    def start(self, widget1, widget2, widget3, widget4,control):
         widget1.destroy()
         widget2.destroy()
         widget3.config(text="Black:2                      White:2")
         widget4.place(x=472, y=960)
-        self.canvas.bind("<Button-1>", self.click)
+        self.canvas.bind("<Button-1>",self.click)
         self.draw_grid(896, 896)
         self.play(3, 3, "white", 2, 2)
         self.play(3, 4, "black", 2, 2)
@@ -58,4 +59,6 @@ class myGUI:
     def click(self, event):
         row = event.y // 112
         col = event.x // 112
-        return row, col
+        control= self.control
+        control.handle_move(row, col)
+        # print("Clicked at:", row, col)
