@@ -1,6 +1,6 @@
-# from game import board
-# from game import game_logic
-# from game import file_manager   
-from game import GUI
+import board
+import game_logic
+import file_manager   
+import GUI
 
 ui=GUI.myGUI()
