@@ -92,6 +92,7 @@ def make_move(b,r,c,player):
             pieces_to_flip = check_direc(b,r,c,player,vector)
             for pos in pieces_to_flip:
                 b[pos[0]][pos[1]] = player
+                
 
 def switch_player(player):
     if player == 1: return 2
