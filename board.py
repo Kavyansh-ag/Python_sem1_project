@@ -1,7 +1,7 @@
 class Board:
     def __init__(self):
         self.player = 1 
-        self.grid = [['e' for _ in range(8)] for _ in range(8)]
+        self.grid = [[0 for _ in range(8)] for _ in range(8)]
         #The below 4 lines sets the initial board
         self.grid[3][3] = 2 #white is 2
         self.grid[4][4] = 2

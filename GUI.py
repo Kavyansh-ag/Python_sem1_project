@@ -26,7 +26,6 @@ class myGUI:
 
         self.btn_save = tk.Button(self.root, text="Save")
 
-        self.root.mainloop()
     ###################################################################################
 
     def draw_grid(self, w, h):
@@ -40,6 +39,7 @@ class myGUI:
         y1 = row * 112 + 10
         x2 = (col+1) * 112 - 10
         y2 = (row+1) * 112 - 10
+        color="black" if color==1 else "white"
 
         self.canvas.create_oval(x1, y1, x2, y2, fill=color)
         self.status.config(text=f"Black:{blackscore}                      White:{whitescore}")
@@ -51,10 +51,10 @@ class myGUI:
         widget4.place(x=472, y=960)
         self.canvas.bind("<Button-1>",self.click)
         self.draw_grid(896, 896)
-        self.play(3, 3, "white", 2, 2)
-        self.play(3, 4, "black", 2, 2)
-        self.play(4, 3, "black", 2, 2)
-        self.play(4, 4, "white", 2, 2)
+        self.play(3, 3, 0, 2, 2)
+        self.play(3, 4, 1, 2, 2)
+        self.play(4, 3, 1, 2, 2)
+        self.play(4, 4, 0, 2, 2)
 
     def click(self, event):
         row = event.y // 112
@@ -65,3 +65,6 @@ class myGUI:
 
     def load_game(self,control):
         control.load()
+
+    def run(self):
+       self.root.mainloop()
