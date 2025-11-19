@@ -10,6 +10,16 @@ class Board:
         self.w_score = 2
         self.b_score = 2
 
-    def print_board(self):
-        for row in self.grid:
-            print(*row)
+    def count(self):
+        for i in self.grid:
+            for j in i:
+                if j == 2:
+                    self.w_score+=1
+                elif j == 1:
+                    self.b_score+=1
+        return [self.b_score,self.w_score]
+    
+    def end_game(self):
+        if self.w_score + self.b_score == 64 or self.w_score * self.b_score == 0:
+            return True
+        return False
