@@ -19,13 +19,20 @@ class Game:
                     self.gui.play(r, c,self.board.grid[r][c], self.board.b_score, self.board.w_score)
                     # print(r, c, self.board.grid[r][c])
 
-    # def save(self):
-    #     file_manager.save_game(self.board.grid, self.board.player)
+    def save(self):
+        file_manager.save_game(self.board.grid, self.board.player)
 
     def load(self):
         board_state, current_player = file_manager.load_game()
         if board_state is not None:
             self.board.grid = board_state
             self.board.player = current_player
+        for r in range(8):
+            for c in range(8):
+                if self.board.grid[r][c] != 0:
+                    self.gui.play(r, c,self.board.grid[r][c], self.board.b_score, self.board.w_score)
+                    # print(r, c, self.board.grid[r][c])
+
+        
 
 controller = Game()

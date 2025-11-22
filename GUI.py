@@ -17,14 +17,14 @@ class myGUI:
         self.btn_start = tk.Button(self.root, text="Start",command=lambda: self.start(self.btn_start, self.btn_load, self.status, self.btn_save))
         self.canvas.create_window(448, 400, window=self.btn_start)
 
-        self.btn_load = tk.Button(self.root, text="Load")
+        self.btn_load = tk.Button(self.root, text="Load",command=lambda : self.load_game(self.control))
         self.canvas.create_window(448, 448, window=self.btn_load)
 
         self.status = tk.Label(self.root, text="Othello",
                                font=("Arial", 12), bg="lightgray")
         self.status.place(x=40, y=900, width=920, height=50)
 
-        self.btn_save = tk.Button(self.root, text="Save")
+        self.btn_save = tk.Button(self.root, text="Save",command=lambda : self.save_game(self.control))
 
     ###################################################################################
 
@@ -64,7 +64,16 @@ class myGUI:
         # print("Clicked at:", row, col)
 
     def load_game(self,control):
+        self.btn_start.destroy()
+        self.btn_load.destroy()
+        self.status.config(text="Black:2                      White:2")
+        self.btn_save.place(x=472, y=960)
+        self.canvas.bind("<Button-1>",self.click)
+        self.draw_grid(896, 896)
         control.load()
+
+    def save_game(self,control):
+        control.save()
 
     def run(self):
        self.root.mainloop()
