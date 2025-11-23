@@ -70,6 +70,19 @@ class myGUI:
     def run(self):
     ########start the main event loop
        self.root.mainloop()
+################################################################################################################      
+    def endame(self, blackscore, whitescore):
+    ########display end game message
+        self.canvas.unbind("<Button-1>")
+        self.btn_restart = tk.Button(self.root, text="Restart",command=self.start)
+        self.canvas.create_window(448, 500, window=self.btn_restart)
+        if blackscore > whitescore:
+            winner = "Black"
+        elif whitescore > blackscore:
+            winner = "White"
+        else:
+            winner = "No one. It's a tie"
+        self.status.config(text=f"Black:{blackscore}              {winner} wins              White:{whitescore}")
 ###
 ###
 ###

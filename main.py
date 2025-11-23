@@ -20,6 +20,9 @@ class Game:
             for c in range(8):
                 if self.board.grid[r][c] != 0:
                     self.gui.play(r, c,self.board.grid[r][c], self.board.b_score, self.board.w_score,self.board.player)
+        if(self.board.end_game()):
+            self.gui.endame(self.board.b_score, self.board.w_score)      
+            self.board.__init__()      
 #############################################################################################################################
     def save(self):
     ########save the current game state
