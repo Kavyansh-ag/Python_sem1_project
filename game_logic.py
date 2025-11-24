@@ -56,17 +56,6 @@ def has_legal_moves(b,player):
                 if get_all_flips(b, r, c, player):
                     return True
     return False
-
-
-'''If the next player doesnt have any legal move they turn will skip '''
-def determine_next_player_id(b, last_player):
-    opponent = get_opponent(last_player)
-
-    if has_legal_moves(b, opponent):
-        return opponent
-
-    elif has_legal_moves(b, last_player):
-        return last_player 
      
 '''next_state is the main function which is called by main and returns the final state of the board with the player who will be playing next'''
 def next_state(b,r,c,player):
