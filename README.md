@@ -13,7 +13,7 @@
     The entire project consists of mainly 5 files:
 ### GUI.py: This handles the GUI and the user inputs
 ### board.py: This sets the board and the tokens for the start of the game
-### game_logic.py: This contains the core game logic functions which are called main
+### game_logic.py: This contains the core game logic functions which are called by main
 ### main.py: This is the file where all other files interact.
 ### file_manager.py: This file saves game and also loads a saved game
 
